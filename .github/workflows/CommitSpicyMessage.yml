@@ -1,0 +1,37 @@
+name: Spicy Commit Compliment 🌶️
+ 
+on:
+  push:
+    branches:
+      - main  # Change this if you're using another branch
+ 
+jobs:
+  compliment-commit:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: 🔥 Drop a spicy commit comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const messages = [
+              "🔥 That commit was smoother than butter on hot toast! Nice one, @{AUTHOR}!",
+              "💡 Big brain move detected in this commit by @{AUTHOR} 🧠💥",
+              "🔧 Code updated. Awesomeness upgraded. Well played, @{AUTHOR} 🙌",
+              "⚡ Kaboom! This commit just boosted repo energy by 500% 🚀 @{AUTHOR}, you're unstoppable!",
+              "😎 @{AUTHOR}, your commit made even GitHub do a happy dance 💃",
+              "✨ Magic in the commit! Nice job @{AUTHOR}! Keep casting spells 🪄",
+              "🎯 *Boss move alert!* @{AUTHOR} just made this repo 100% more legendary 🤌"
+            ];
+ 
+            const commitSHA = context.payload.after;
+            const author = context.payload.head_commit.author.username || context.actor;
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            const comment = messages[randomIndex].replace('{AUTHOR}', author);
+ 
+            github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: commitSHA,
+              body: comment
+            }); 
