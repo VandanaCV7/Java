@@ -6,7 +6,7 @@ public static void main(String[] args) {
     // Subtract b from a
     int result = a - b; // Perform subtraction
 
-    System.out.println("The result of " + a + " - " + b + " is: " + result); // Output the result   
+    System.out.println("The result of given " + a + " - " + b + " is: " + result); // Output the result   
 }
     
 }
