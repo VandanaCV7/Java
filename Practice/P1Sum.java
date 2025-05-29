@@ -1,4 +1,3 @@
-package Practice;
 
 public class P1Sum {
     public static void main(String[] args) {
